@@ -2,4 +2,16 @@
 
 @theme {
   --color-primary: var(--el-color-primary);
+  --color-success: var(--el-color-success);
+  --color-warning: var(--el-color-warning);
+  --color-danger: var(--el-color-danger);
+}
+
+@layer base {
+  html, body {
+    @apply m-0 p-0 h-full w-full bg-gray-50 text-gray-900 antialiased overflow-hidden;
+  }
+  #app {
+    @apply h-full w-full;
+  }
 }
