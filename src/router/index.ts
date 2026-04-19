@@ -16,7 +16,11 @@ const router = createRouter({
       component: () => import('@/layouts/AdminLayout.vue'),
       meta: { requiresAuth: true },
       children: [
-        // Domain routes (Accounts, Songs, Resources) will be added here later
+        {
+          path:'accounts',
+          name:'Accounts',
+          component: () => import('@/views/accounts/AccountList.vue'),
+        }
       ],
     },
   ],

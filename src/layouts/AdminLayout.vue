@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ArrowDown, Menu } from '@element-plus/icons-vue'
+import { ArrowDown, Menu, User } from '@element-plus/icons-vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const router = useRouter()
+const route = useRoute()
 const authStore = useAuthStore()
 
 const handleCommand = (command: string) => {
@@ -27,23 +28,29 @@ const handleCommand = (command: string) => {
 
 <template>
   <el-container class="h-screen w-screen bg-gray-50">
-    <!-- Placeholder Sidebar -->
     <el-aside width="250px" class="bg-gray-900 text-white shadow-lg">
       <div class="h-16 flex items-center justify-center border-b border-gray-800">
         <span class="text-xl font-bold tracking-wider">MinusOne</span>
       </div>
       <el-menu
+        :default-active="route.path"
+        router
         active-text-color="#409eff"
         background-color="#111827"
         text-color="#fff"
         class="border-r-0"
-        default-active="1"
       >
-        <el-menu-item index="1">
+        <el-menu-item index="/">
           <el-icon><Menu /></el-icon>
           <span>Dashboard</span>
         </el-menu-item>
-        <!-- Future routes: Accounts, Songs, Resources -->
+
+        <el-menu-item index="/accounts">
+          <el-icon><User /></el-icon>
+          <span>Accounts</span>
+        </el-menu-item>
+
+        <!-- Future routes: Songs, Resources -->
       </el-menu>
     </el-aside>
 
