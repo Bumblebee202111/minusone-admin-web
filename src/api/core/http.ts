@@ -24,8 +24,8 @@ http.interceptors.response.use(
     return response.data
   },
   (error) => {
-    const status = error.respose?.status
-    const data = error.reponse?.data
+    const status = error.response?.status
+    const data = error.response?.data
     if (status === 400) {
       const msg = data?.message || 'Validation failed. Please check your input.'
       ElMessage.error(msg)
@@ -35,18 +35,18 @@ http.interceptors.response.use(
 
       const isLoginRequest = error.config?.url?.includes('/login')
 
-      if(isLoginRequest) {
-        ElMessage.error(isLoginRequest.message || 'Invalid username or password')
+      if (isLoginRequest) {
+        ElMessage.error(data.message || 'Invalid username or password')
       } else {
         ElMessage.warning('Session expired. Please log in again.')
-        router.push({ name: 'Login', query: { redirect: router.currentRoute.value.fullPath } })
+        void router.push({ name: 'Login', query: { redirect: router.currentRoute.value.fullPath } })
       }
     } else if (status === 403) {
       ElMessage.error('Access denied. You lack the required permissions.')
     } else if (status === 500) {
       ElMessage.error('Internal server error. Please try again later.')
     } else {
-      ElMessage.error(error.message||'Network error occurred.')
+      ElMessage.error(error.message || 'Network error occurred.')
     }
 
     return Promise.reject(error)
